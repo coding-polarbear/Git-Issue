@@ -14,15 +14,17 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    val binding: ActivityMainBinding by lazy {
+    private val binding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 
-    val viewModel: MainViewModel by lazy {
+    private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
 
-    val issueAdapter: IssueAdapter = IssueAdapter()
+    private val issueAdapter: IssueAdapter by lazy {
+        IssueAdapter(viewModel)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         viewModel.issueUpdateEvent.observe(this) {
-            issueAdapter.submitList(viewModel.issueList)
+            issueAdapter.submitList(viewModel.itemList)
         }
     }
 }
