@@ -2,6 +2,7 @@ package tech.purplebeen.gitissue.feature.main
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
@@ -12,15 +13,21 @@ import tech.purplebeen.core.annotation.qualifier.ForRepository
 import tech.purplebeen.core.api.repository.IssueRepository
 import tech.purplebeen.gitissue.mvvm.SingleLiveEvent
 import tech.purplebeen.core.MainViewType
+import tech.purplebeen.core.annotation.qualifier.ForPreference
 import tech.purplebeen.core.db.Issue
+import tech.purplebeen.gitissue.util.GlobalConst
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     application: Application,
+    @ForPreference val sharedPreferences: SharedPreferences,
     @ForRepository val repository: IssueRepository
 ) : AndroidViewModel(application) {
     companion object {
         val TAG: String = MainViewModel::class.java.simpleName
+
+        private val SUCCESS_ORG_NAME = "success_org_name"
+        private val SUCCESS_REPO_NAME = "success_repo_name"
     }
 
     private val _issueListUpdateEvent: SingleLiveEvent<Void> = SingleLiveEvent()
@@ -67,6 +74,9 @@ class MainViewModel @Inject constructor(
                     _itemList.add(Item(MainViewType.ISSUE, issue))
                 }
                 _itemList.add(5, Item(MainViewType.IMAGE, null))
+
+                sharedPreferences.edit().putString(SUCCESS_ORG_NAME, org).apply()
+                sharedPreferences.edit().putString(SUCCESS_REPO_NAME, repo).apply()
                 issueUpdateEvent.call()
             }, {e ->
                 e.message?.let {
@@ -99,6 +109,14 @@ class MainViewModel @Inject constructor(
             val orgs = dataArray[dataArray.size - 2]
             val repo = dataArray[dataArray.size - 1]
             getRepoList(orgs, repo)
+        }
+    }
+
+    fun loadLastSuccessData() {
+        val lastOrg = sharedPreferences.getString(SUCCESS_ORG_NAME, "")
+        val lastRepo = sharedPreferences.getString(SUCCESS_REPO_NAME, "")
+        if(!lastOrg.isNullOrEmpty() && !lastRepo.isNullOrEmpty()) {
+            getRepoList(lastOrg, lastRepo)
         }
     }
 }

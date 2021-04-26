@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         initView()
         observeViewModel()
 
-        viewModel.getRepoList("google", "dagger")
+        viewModel.loadLastSuccessData()
     }
 
     override fun onNewIntent(intent: Intent?) {
