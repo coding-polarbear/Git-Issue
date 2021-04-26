@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import tech.purplebeen.gitissue.feature.issue_detail.IssueDetailViewModel
 import tech.purplebeen.gitissue.feature.main.MainViewModel
 
 @Module
@@ -16,4 +17,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     internal abstract fun mainViewModel(viewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(IssueDetailViewModel::class)
+    internal abstract fun issueDetailViewModel(viewModel: IssueDetailViewModel): ViewModel
 }

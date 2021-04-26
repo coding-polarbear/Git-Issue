@@ -1,5 +1,6 @@
 package tech.purplebeen.gitissue.feature.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -9,6 +10,11 @@ import tech.purplebeen.gitissue.BaseApplication
 import tech.purplebeen.gitissue.R
 import tech.purplebeen.gitissue.RepoInsertDialog
 import tech.purplebeen.gitissue.databinding.ActivityMainBinding
+import tech.purplebeen.gitissue.feature.issue_detail.IssueDetailActivity
+import tech.purplebeen.gitissue.util.GlobalConst.BODY
+import tech.purplebeen.gitissue.util.GlobalConst.ISSUE_NUMBER
+import tech.purplebeen.gitissue.util.GlobalConst.PROFILE_URL
+import tech.purplebeen.gitissue.util.GlobalConst.USER_NAME
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -81,5 +87,24 @@ class MainActivity : AppCompatActivity() {
         viewModel.issueErrorEvent.observe(this) {
             errorDialog.show()
         }
+
+        viewModel.issueSelectedEvent.observe(this) {
+            navigateToIssueDetail()
+        }
+    }
+
+    private fun navigateToIssueDetail() {
+        viewModel.selectedIssue?.let {
+            val issueDetailIntent: Intent = Intent(this, IssueDetailActivity::class.java)
+            issueDetailIntent.putExtra(PROFILE_URL, it.user.profileUrl)
+            issueDetailIntent.putExtra(BODY, it.body)
+            issueDetailIntent.putExtra(USER_NAME, it.user.userName)
+            issueDetailIntent.putExtra(ISSUE_NUMBER, it.number)
+            startActivity(issueDetailIntent)
+        }
+    }
+
+    private fun navigateToWeb() {
+
     }
 }

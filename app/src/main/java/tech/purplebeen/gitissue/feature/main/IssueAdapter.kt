@@ -35,12 +35,17 @@ class IssueAdapter(val viewModel: MainViewModel): RecyclerView.Adapter<RecyclerV
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(getItemViewType(position) == MainViewType.ISSUE.type) {
-            (holder as IssueViewHolder).binding.issue = itemList[position].issue
-        } else if(getItemViewType(position) == MainViewType.TITLE.type) {
-            (holder as TitleViewHolder).binding.viewModel = viewModel
-        } else {
-            (holder as ImageViewHolder).binding.imageUrl = GlobalConst.IMAGE_URL
+        when {
+            getItemViewType(position) == MainViewType.ISSUE.type -> {
+                (holder as IssueViewHolder).binding.issue = itemList[position].issue
+                holder.binding.viewModel = viewModel
+            }
+            getItemViewType(position) == MainViewType.TITLE.type -> {
+                (holder as TitleViewHolder).binding.viewModel = viewModel
+            }
+            else -> {
+                (holder as ImageViewHolder).binding.imageUrl = GlobalConst.IMAGE_URL
+            }
         }
     }
 

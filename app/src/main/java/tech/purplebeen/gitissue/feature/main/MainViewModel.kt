@@ -10,6 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import tech.purplebeen.core.annotation.qualifier.ForRepository
 import tech.purplebeen.core.api.repository.IssueRepository
 import tech.purplebeen.gitissue.mvvm.SingleLiveEvent
+import tech.purplebeen.model.Issue
 import tech.purplebeen.model.Item
 import tech.purplebeen.model.MainViewType
 import javax.inject.Inject
@@ -42,6 +43,12 @@ class MainViewModel @Inject constructor(
     val titleClickEvent: SingleLiveEvent<Void>
         get() = _titleClickEvent
 
+    var selectedIssue: Issue? = null
+
+    private val _issueSelectedEvent: SingleLiveEvent<Void> = SingleLiveEvent()
+    val issueSelectedEvent: SingleLiveEvent<Void>
+        get() = _issueSelectedEvent
+
     @SuppressLint("CheckResult")
     fun getRepoList(org: String, repo: String) {
         val before = titleField.get()
@@ -68,5 +75,13 @@ class MainViewModel @Inject constructor(
 
     fun onTitleClicked() {
         _titleClickEvent.call()
+    }
+
+    fun onIssueClicked(id: Int) {
+        selectedIssue = _itemList.filter { item ->
+            item.issue?.id == id
+        }[0].issue
+
+        _issueSelectedEvent.call()
     }
 }

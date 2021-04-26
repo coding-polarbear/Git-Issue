@@ -4,6 +4,7 @@ import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import tech.purplebeen.core.module.*
+import tech.purplebeen.gitissue.feature.issue_detail.IssueDetailComponent
 import tech.purplebeen.gitissue.feature.main.MainComponent
 import tech.purplebeen.gitissue.mvvm.ViewModelModule
 import javax.inject.Singleton
@@ -31,4 +32,6 @@ interface ApplicationComponent {
     fun inject(application: BaseApplication)
 
     fun mainComponentBuilder(): MainComponent.Builder
+
+    fun issueDetailComponentBuilder(): IssueDetailComponent.Builder
 }
