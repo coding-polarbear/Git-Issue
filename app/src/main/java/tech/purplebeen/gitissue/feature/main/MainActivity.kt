@@ -1,6 +1,7 @@
 package tech.purplebeen.gitissue.feature.main
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -11,6 +12,7 @@ import tech.purplebeen.gitissue.R
 import tech.purplebeen.gitissue.RepoInsertDialog
 import tech.purplebeen.gitissue.databinding.ActivityMainBinding
 import tech.purplebeen.gitissue.feature.issue_detail.IssueDetailActivity
+import tech.purplebeen.gitissue.util.GlobalConst
 import tech.purplebeen.gitissue.util.GlobalConst.BODY
 import tech.purplebeen.gitissue.util.GlobalConst.ISSUE_NUMBER
 import tech.purplebeen.gitissue.util.GlobalConst.PROFILE_URL
@@ -91,6 +93,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.issueSelectedEvent.observe(this) {
             navigateToIssueDetail()
         }
+
+        viewModel.imageSelectEvent.observe(this) {
+            navigateToWeb()
+        }
     }
 
     private fun navigateToIssueDetail() {
@@ -105,6 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToWeb() {
-
+        val webIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse(GlobalConst.THINGSFLOW_URL))
+        startActivity(webIntent)
     }
 }

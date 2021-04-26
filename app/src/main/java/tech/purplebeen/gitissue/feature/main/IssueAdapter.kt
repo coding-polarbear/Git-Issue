@@ -45,6 +45,7 @@ class IssueAdapter(val viewModel: MainViewModel): RecyclerView.Adapter<RecyclerV
             }
             else -> {
                 (holder as ImageViewHolder).binding.imageUrl = GlobalConst.IMAGE_URL
+                holder.binding.viewModel = viewModel
             }
         }
     }

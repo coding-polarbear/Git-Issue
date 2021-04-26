@@ -49,6 +49,10 @@ class MainViewModel @Inject constructor(
     val issueSelectedEvent: SingleLiveEvent<Void>
         get() = _issueSelectedEvent
 
+    private val _imageSelectEvent: SingleLiveEvent<Void> = SingleLiveEvent()
+    val imageSelectEvent: SingleLiveEvent<Void>
+        get() = _imageSelectEvent
+
     @SuppressLint("CheckResult")
     fun getRepoList(org: String, repo: String) {
         val before = titleField.get()
@@ -83,5 +87,9 @@ class MainViewModel @Inject constructor(
         }[0].issue
 
         _issueSelectedEvent.call()
+    }
+
+    fun onImageClicked() {
+        _imageSelectEvent.call()
     }
 }
