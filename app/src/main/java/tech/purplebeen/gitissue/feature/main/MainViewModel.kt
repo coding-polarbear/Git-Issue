@@ -38,8 +38,13 @@ class MainViewModel @Inject constructor(
     val titleField: ObservableField<String>
         get() = _titleField
 
+    private val _titleClickEvent: SingleLiveEvent<Void> = SingleLiveEvent()
+    val titleClickEvent: SingleLiveEvent<Void>
+        get() = _titleClickEvent
+
     @SuppressLint("CheckResult")
     fun getRepoList(org: String, repo: String) {
+        val before = titleField.get()
         titleField.set("$org / $repo")
         repository.getIssueList(org, repo)
             .subscribeOn(Schedulers.io())
@@ -56,7 +61,12 @@ class MainViewModel @Inject constructor(
                 e.message?.let {
                     Log.e(TAG, it)
                 }
-
+                _titleField.set(before)
+                _issueErrorEvent.call()
             })
+    }
+
+    fun onTitleClicked() {
+        _titleClickEvent.call()
     }
 }

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Android Assignment</string>
+    <string name="please_input_repo_name">Organization Name\nRepo Name</string>
+    <string name="organization">Organization</string>
+    <string name="repo">Repository</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_occurred">Error Occurred!</string>
 </resources>
