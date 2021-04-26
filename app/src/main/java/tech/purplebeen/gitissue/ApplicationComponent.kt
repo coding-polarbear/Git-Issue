@@ -17,6 +17,7 @@ import javax.inject.Singleton
         APIModule::class,
         ViewModelModule::class,
         DataSourceModule::class,
+        DatabaseModule::class,
     RepositoryModule::class
     ]
 )

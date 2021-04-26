@@ -3,12 +3,12 @@ package tech.purplebeen.gitissue.feature.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import tech.purplebeen.core.Item
 import tech.purplebeen.gitissue.databinding.ItemDefaultImageBinding
 import tech.purplebeen.gitissue.databinding.ItemDefaultIssueBinding
 import tech.purplebeen.gitissue.databinding.ItemDefaultTitleBinding
 import tech.purplebeen.gitissue.util.GlobalConst
-import tech.purplebeen.model.Item
-import tech.purplebeen.model.MainViewType
+import tech.purplebeen.core.MainViewType
 
 class IssueAdapter(val viewModel: MainViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private var itemList: List<Item> = ArrayList()

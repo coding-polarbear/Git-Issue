@@ -2,18 +2,17 @@ package tech.purplebeen.gitissue.feature.main
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Intent
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import tech.purplebeen.core.Item
 import tech.purplebeen.core.annotation.qualifier.ForRepository
 import tech.purplebeen.core.api.repository.IssueRepository
 import tech.purplebeen.gitissue.mvvm.SingleLiveEvent
-import tech.purplebeen.model.Issue
-import tech.purplebeen.model.Item
-import tech.purplebeen.model.MainViewType
+import tech.purplebeen.core.MainViewType
+import tech.purplebeen.core.db.Issue
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(

@@ -1,4 +1,4 @@
-package tech.purplebeen.model
+package tech.purplebeen.core
 
 enum class MainViewType(val type: Int) {
     TITLE(0),

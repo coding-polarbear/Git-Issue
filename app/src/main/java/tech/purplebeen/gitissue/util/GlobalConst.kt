@@ -7,4 +7,5 @@ object GlobalConst {
     const val BODY = "body"
     const val USER_NAME = "user_name"
     const val ISSUE_NUMBER = "issue_number"
+    const val DB_NAME = "git_issue.db"
 }
