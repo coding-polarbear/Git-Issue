@@ -2,6 +2,7 @@ package tech.purplebeen.gitissue.feature.main
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Intent
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
@@ -91,5 +92,14 @@ class MainViewModel @Inject constructor(
 
     fun onImageClicked() {
         _imageSelectEvent.call()
+    }
+
+    fun parseDataFromIntent(dataString: String?) {
+        dataString?.let{
+            val dataArray = it.split("/")
+            val orgs = dataArray[dataArray.size - 2]
+            val repo = dataArray[dataArray.size - 1]
+            getRepoList(orgs, repo)
+        }
     }
 }

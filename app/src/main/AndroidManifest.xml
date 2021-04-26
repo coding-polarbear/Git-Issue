@@ -13,11 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GitIssue">
         <activity android:name=".feature.issue_detail.IssueDetailActivity"></activity>
-        <activity android:name=".feature.main.MainActivity">
+        <activity android:name=".feature.main.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="*"
+                    android:scheme="thingsflow" />
             </intent-filter>
         </activity>
     </application>

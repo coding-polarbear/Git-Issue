@@ -49,6 +49,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.getRepoList("google", "dagger")
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        viewModel.parseDataFromIntent(intent?.dataString)
+    }
+
     private fun injectComponent() {
         BaseApplication.getAppComponent()
             .mainComponentBuilder()
