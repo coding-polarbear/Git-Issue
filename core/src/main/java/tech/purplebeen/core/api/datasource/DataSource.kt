@@ -1,5 +1,6 @@
 package tech.purplebeen.core.api.datasource
 
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
 import tech.purplebeen.core.db.Issue

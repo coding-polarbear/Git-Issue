@@ -26,10 +26,10 @@ data class Issue(
     val body: String,
 
     @ColumnInfo(name="orgs")
-    val orgs: String,
+    var orgs: String,
 
     @ColumnInfo(name = "repo")
-    val repo: String,
+    var repo: String,
 
     @Embedded
     @SerializedName("user") val user: User
