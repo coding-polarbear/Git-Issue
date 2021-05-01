@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         initView()
         observeViewModel()
 
-        viewModel.loadLastSuccessData()
+        viewModel.loadData(intent)
     }
 
     override fun onNewIntent(intent: Intent?) {

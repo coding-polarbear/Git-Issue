@@ -2,6 +2,7 @@ package tech.purplebeen.gitissue.feature.main
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.databinding.ObservableField
@@ -113,13 +114,17 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun loadLastSuccessData() {
-        val lastOrg = sharedPreferences.getString(SUCCESS_ORG_NAME, "")
-        val lastRepo = sharedPreferences.getString(SUCCESS_REPO_NAME, "")
-        if(!lastOrg.isNullOrEmpty() && !lastRepo.isNullOrEmpty()) {
-            getRepoList(lastOrg, lastRepo)
+    fun loadData(intent: Intent) {
+        if(intent.dataString == null) {
+            val lastOrg = sharedPreferences.getString(SUCCESS_ORG_NAME, "")
+            val lastRepo = sharedPreferences.getString(SUCCESS_REPO_NAME, "")
+            if (!lastOrg.isNullOrEmpty() && !lastRepo.isNullOrEmpty()) {
+                getRepoList(lastOrg, lastRepo)
+            } else {
+                getRepoList("google", "dagger")
+            }
         } else {
-            getRepoList("google", "dagger")
+            parseDataFromIntent(intent.dataString)
         }
     }
 }
