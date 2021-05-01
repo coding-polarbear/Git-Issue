@@ -15,6 +15,7 @@ import tech.purplebeen.gitissue.mvvm.SingleLiveEvent
 import tech.purplebeen.core.MainViewType
 import tech.purplebeen.core.annotation.qualifier.ForPreference
 import tech.purplebeen.core.db.Issue
+import tech.purplebeen.gitissue.R
 import tech.purplebeen.gitissue.util.GlobalConst
 import javax.inject.Inject
 
@@ -117,6 +118,8 @@ class MainViewModel @Inject constructor(
         val lastRepo = sharedPreferences.getString(SUCCESS_REPO_NAME, "")
         if(!lastOrg.isNullOrEmpty() && !lastRepo.isNullOrEmpty()) {
             getRepoList(lastOrg, lastRepo)
+        } else {
+            getRepoList("google", "dagger")
         }
     }
 }
